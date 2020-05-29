@@ -12,8 +12,8 @@ from django.contrib.auth import get_user_model
 class Track(models.Model):
     # id created automatically
     title = models.CharField(max_length=50)
-    description = models.TextField(blank=True)
-    url = models.URLField()
+    artist = models.TextField(blank=True)
+    album = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     # adding the current user as a foreign key, will delete all records if the user is deleted
     posted_by = models.ForeignKey(
@@ -24,4 +24,4 @@ class Like(models.Model):
     user = models.ForeignKey(
         get_user_model(), null=True, on_delete=models.CASCADE)
     track = models.ForeignKey(
-        'tracks.Track', related_name='likes', on_delete=models.CASCADE) #Note tracks.Track maps to tracks_track in the DB
+        'tracks.Track', related_name='likes', on_delete=models.CASCADE)  # Note tracks.Track maps to tracks_track in the DB

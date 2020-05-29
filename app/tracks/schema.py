@@ -22,11 +22,11 @@ class UpdateTrack(graphene.Mutation):
 
     class Arguments:
         title = graphene.String()
-        description = graphene.String()
-        url = graphene.String()
+        artist = graphene.String()
+        album = graphene.String()
         track_id = graphene.Int(required=True)
 
-    def mutate(self, info, track_id, title=None, description=None, url=None):
+    def mutate(self, info, track_id, title=None, artist=None, album=None):
 
         user = info.context.user
 
@@ -37,8 +37,8 @@ class UpdateTrack(graphene.Mutation):
                 f'Track can only be modified by {track.posted_by}')
 
         track.title = title
-        track.description = description
-        track.url = url
+        track.artist = artist
+        track.album = album
 
         track.save()
         return UpdateTrack(track=track)
@@ -49,16 +49,16 @@ class CreateTrack(graphene.Mutation):
 
     class Arguments:
         title = graphene.String()
-        description = graphene.String()
-        url = graphene.String()
+        artist = graphene.String()
+        album = graphene.String()
 
-    def mutate(self, info, title, description, url):
+    def mutate(self, info, title, artist, album):
         user = info.context.user
 
         if user.is_anonymous:
             raise GraphQLError('User not authenticated')
-        track = Track(title=title, description=description,
-                      url=url, posted_by=user)
+        track = Track(title=title, artist=artist,
+                      album=album, posted_by=user)
         track.save()  # saves to the DB
         return CreateTrack(track=track)
 
@@ -121,8 +121,8 @@ class Query(graphene.ObjectType):
         if search:
             filter = (
                 Q(title__icontains=search) |
-                Q(description__icontains=search) |
-                Q(url__icontains=search) |
+                Q(artist__icontains=search) |
+                Q(album__icontains=search) |
                 Q(posted_by__username=search)
 
             )
