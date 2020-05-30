@@ -8,15 +8,17 @@ class TrackList extends React.Component {
   componentDidMount() {
     this.props.getDataAction();
   }
-  renderList() {
+  hlpRender() {
     return this.props.tracks.map(({ id, title, artist, postedBy }) => {
       return (
         <div key={id}>
           <div className="ui item">
-            <i className="ui large middle aligned icon user" />
+            <i className="ui large middle aligned icon headphones" />
             <div className="ui content">
               <div className="ui description">
-                <h2>{title}</h2>
+                <p>{title}</p>
+              </div>
+              <div className="ui description">
                 <p>{artist}</p>
               </div>
               <UserHeader x={postedBy} />
@@ -29,7 +31,7 @@ class TrackList extends React.Component {
   }
 
   render() {
-    return <div>{this.renderList()}</div>;
+    return <div>{this.hlpRender()}</div>;
   }
 }
 
