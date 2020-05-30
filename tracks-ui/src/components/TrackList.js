@@ -2,15 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { getDataAction } from "../actions";
-import UserHeader from "./UserHeader"
+import UserHeader from "./UserHeader";
 
 class TrackList extends React.Component {
   componentDidMount() {
     this.props.getDataAction();
   }
   renderList() {
-    return this.props.tracks.map(({id, title, artist, postedBy}) => {
-      console.log(postedBy)
+    return this.props.tracks.map(({ id, title, artist, postedBy }) => {
       return (
         <div key={id}>
           <div className="ui item">
@@ -20,7 +19,7 @@ class TrackList extends React.Component {
                 <h2>{title}</h2>
                 <p>{artist}</p>
               </div>
-                 <UserHeader x={postedBy}/>  
+              <UserHeader x={postedBy} />
               <div className="ui divider"></div>
             </div>
           </div>

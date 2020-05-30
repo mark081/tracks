@@ -28,12 +28,19 @@ const GET_TRACKS_QUERY = gql`
 
 export const getDataAction = () => {
   return async (dispatch) => {
-    const { loading, error, data } = await client.query({
+    const { data } = await client.query({
       query: GET_TRACKS_QUERY,
     });
-    dispatch({
-      type: "GET_DATA",
-      payload: data.tracks,
-    });
+    if (data) {
+      dispatch({
+        type: "GET_DATA",
+        payload: data.tracks,
+      });
+    } else {
+      dispatch({
+        type: "GET_DATA",
+        payload: [],
+      });
+    }
   };
 };
