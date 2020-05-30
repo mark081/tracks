@@ -11,20 +11,12 @@ class TrackList extends React.Component {
   hlpRender() {
     return this.props.tracks.map(({ id, title, artist, postedBy }) => {
       return (
-        <div key={id}>
-          <div className="ui item">
-            <i className="ui large middle aligned icon headphones" />
-            <div className="ui content">
-              <div className="ui description">
-                <p>{title}</p>
-              </div>
-              <div className="ui description">
-                <p>{artist}</p>
-              </div>
-              <User userId={postedBy.id} />
-              <div className="ui divider"></div>
-            </div>
+        <div className="ui raised segment" key={id}>
+          <div className="ui blue ribbon label">
+            <span style={{ fontSize: "medium" }}>{title} </span>- {artist}
           </div>
+          <User userId={postedBy.id} />
+          <div className="ui divider"></div>
         </div>
       );
     });

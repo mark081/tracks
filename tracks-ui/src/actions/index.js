@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import ApolloClient from "apollo-boost";
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql/",
+  uri: "http://192.168.1.26:8000/graphql/",
 });
 
 const GET_TRACKS_QUERY = gql`

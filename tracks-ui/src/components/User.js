@@ -9,9 +9,8 @@ class User extends React.Component {
 
 
     render = () => {
-        console.log(this.props.user)
         if (this.props.user)
-            return <div>Posted By {this.props.user.username}</div>;
+            return <div className="ui description" style={{ margin: '10px' }}>Posted By {this.props.user.username}</div>;
         else
             return <div>Wait a sec</div>;
     }
