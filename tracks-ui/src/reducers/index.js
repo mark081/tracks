@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
+import trackReducer from "./trackReducer";
+
 
 export default combineReducers({
-  dummyReducer: () => {
-    return 1;
-  },
+  tracks: trackReducer,
 });
