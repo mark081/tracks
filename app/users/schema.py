@@ -9,7 +9,7 @@ class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
         # restricts the user fields we import
-        only_fields = ('id', 'username', 'email', 'password')
+        # only_fields = ('id', 'username', 'email', 'password')
 
 
 class Query(graphene.ObjectType):

@@ -26,21 +26,44 @@ const GET_TRACKS_QUERY = gql`
   }
 `;
 
+const GET_USER_QUERY = gql`
+  query GetUser($id: Int) {
+    user(id: $id) {
+      username
+      id
+      trackSet {
+        id
+      }
+      likeSet {
+        track {
+          id
+        }
+      }
+    }
+  }
+`;
+
 export const getDataAction = () => {
   return async (dispatch) => {
     const { data } = await client.query({
       query: GET_TRACKS_QUERY,
     });
-    if (data) {
-      dispatch({
-        type: "GET_DATA",
-        payload: data.tracks,
-      });
-    } else {
-      dispatch({
-        type: "GET_DATA",
-        payload: [],
-      });
-    }
+    dispatch({
+      type: "GET_DATA",
+      payload: data.tracks,
+    });
+  };
+};
+
+export const getUserAction = (id) => {
+  return async (dispatch) => {
+    const { data } = await client.query({
+      query: GET_USER_QUERY,
+      variables: { id: id },
+    });
+    dispatch({
+      type: "GET_USER",
+      payload: data.user,
+    });
   };
 };

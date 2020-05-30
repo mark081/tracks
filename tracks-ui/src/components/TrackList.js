@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { getDataAction } from "../actions";
-import UserHeader from "./UserHeader";
+import User from "./User";
 
 class TrackList extends React.Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class TrackList extends React.Component {
               <div className="ui description">
                 <p>{artist}</p>
               </div>
-              <UserHeader x={postedBy} />
+              <User userId={postedBy.id} />
               <div className="ui divider"></div>
             </div>
           </div>
