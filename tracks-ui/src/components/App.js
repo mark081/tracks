@@ -1,12 +1,16 @@
 import React from "react";
 import TrackList from "./TrackList";
 
+/**
+ *
+ * Currently TrackList is our main container component
+ *
+ */
 
 const App = () => (
-  // return <div className="ui container">App</div>
-    <div className="ui container">
-      <TrackList />
-    </div>
+  <div className="ui container">
+    <TrackList />
+  </div>
 );
 
 export default App;

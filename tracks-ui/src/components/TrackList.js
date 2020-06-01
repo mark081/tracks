@@ -8,6 +8,7 @@ class TrackList extends React.Component {
   componentDidMount() {
     this.props.getDataAction();
   }
+  
   hlpRender() {
     return this.props.tracks.map(({ id, title, artist, postedBy }) => {
       return (
