@@ -2,29 +2,50 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { getDataAction } from "../actions";
-import User from "./User";
+import { selectTrackAction} from "..//actions";
+
+
+/**
+ *
+ * TrackList Component
+ *
+ * This component is tied to the getDataAction and trackReducer. We need the data in our redux state to render so we make the call to the AC
+ * after the component mounts
+ *
+ * We will call the getDatAction AC which is availble to us through connect() - which connects our AC to this class
+ * Additionally, connect will map our relevant REDUX state object (track) to our props. This mapping is defined in our mapStateToProps() function
+ *
+ *
+ *
+ */
 
 class TrackList extends React.Component {
   componentDidMount() {
     this.props.getDataAction();
   }
-  
+
   hlpRender() {
-    return this.props.tracks.map(({ id, title, artist, postedBy }) => {
+    const tracks = this.props.tracks.map((track) => {
       return (
-        <div className="ui raised segment" key={id}>
-          <div className="ui blue ribbon label">
-            <span style={{ fontSize: "medium" }}>{title} </span>- {artist}
+        <div className="ui item" key={track.title}>
+          <div className="ui right floated content">
+            <button
+              className="ui button primary"
+              onClick={() => this.props.selectTrackAction(track)}
+            >
+              Select
+            </button>
           </div>
-          <User userId={postedBy.id} />
-          <div className="ui divider"></div>
+          <div className="ui content">{track.title}</div>
         </div>
       );
     });
+    return <div className="ui divided list">{tracks}</div>;
   }
 
+
   render() {
-    return <div>{this.hlpRender()}</div>;
+    return this.hlpRender();
   }
 }
 
@@ -32,4 +53,4 @@ const mapStateToProps = (state) => {
   return { tracks: state.tracks }; //posts is defined in call to CombineReducers
 };
 
-export default connect(mapStateToProps, { getDataAction })(TrackList); //Action creator
+export default connect(mapStateToProps, { getDataAction, selectTrackAction })(TrackList); //Action creator

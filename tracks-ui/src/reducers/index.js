@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import trackReducer from "./trackReducer";
+import trackListReducer from "./trackListReducer";
 import userReducer from "./userReducer";
+import trackReducer from "./trackReducer";
 
 /**
  * 
@@ -9,6 +10,7 @@ import userReducer from "./userReducer";
  */
 
 export default combineReducers({
-  tracks: trackReducer,
-  users: userReducer
+  tracks: trackListReducer,
+  users: userReducer,
+  track: trackReducer
 });
