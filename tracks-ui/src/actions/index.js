@@ -1,12 +1,7 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import _ from "lodash";
-
-//TODO: Get this into a config file
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: "http://192.168.1.26:8000/graphql/",
-});
+import faker from "faker";
+import gqlClient from "../api/trackGql";
 
 /**
  *
@@ -23,12 +18,10 @@ const GET_TRACKS_QUERY = gql`
       album
       postedBy {
         id
-        username
       }
       likes {
         user {
           id
-          username
         }
       }
     }
@@ -40,6 +33,8 @@ const GET_USER_QUERY = gql`
     user(id: $id) {
       username
       id
+      dateJoined
+      email
       trackSet {
         id
       }
@@ -67,13 +62,14 @@ const GET_USER_QUERY = gql`
 
 const _memoGetUserAction = _.memoize(async (id, dispatch) => {
   console.log(id);
-  const { data } = await client.query({
+  const { data } = await gqlClient.query({
     query: GET_USER_QUERY,
     variables: { id: id },
   });
+  let user = { ...data.user, avatar: faker.image.avatar() }; //Little placeholder until photos are in
   dispatch({
     type: "GET_USER",
-    payload: data.user,
+    payload: user,
   });
 });
 
@@ -85,7 +81,7 @@ export const getUserAction = (id) => {
 
 export const getDataAction = () => {
   return async (dispatch) => {
-    const { data } = await client.query({
+    const { data } = await gqlClient.query({
       query: GET_TRACKS_QUERY,
     });
     dispatch({

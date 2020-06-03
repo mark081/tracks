@@ -20,17 +20,29 @@ import { getUserAction } from "../actions";
 class User extends React.Component {
   componentDidMount = () => {
     this.props.getUserAction(this.props.userId); //Call an action to get the user information
-      };
+  };
 
   componentDidUpdate = () => {
     this.props.getUserAction(this.props.userId); //Call an action to get the user information
-  }
+  };
 
   render = () => {
     if (this.props.user) {
+      const {avatar, username, dateJoined,email} = this.props.user
       return (
-        <div className="ui description">
-          Posted By {this.props.user.username}
+        <div className="comment">
+          <a href="/" className="avatar">
+            <img alt="avatar" src={avatar} />
+          </a>
+          <div className="content">
+        <div className="author">
+          <h4>Posted by {username}</h4>
+        </div>
+        <div className="metadata">
+          User since <span className="date">{new Date(dateJoined).toDateString()}</span>
+        </div>
+        <div className="email">{email}</div>
+      </div>          
         </div>
       );
     } else return <div>Wait a sec</div>;

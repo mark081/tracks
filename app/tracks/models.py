@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 # This is the Django ORM
 # class = table = [directory name]_classname(tolower))
-#fields = fields
+# fields = fields
 #
 # Note: when creating a foreign key, related_name allows foreign table to access by this name
 #

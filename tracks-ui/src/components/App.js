@@ -10,11 +10,11 @@ import TrackDetail from "./TrackDetail";
 
 const App = () => (
   <div className="ui container grid">
-    <div className="ui row">
-      <div className="column eight wide">
+    <div className="ui column">
+      <div className="row eight wide">
         <TrackList />
       </div>
-      <div className="column eight wide">
+      <div className="row eight wide">
         <TrackDetail />
       </div>
     </div>
