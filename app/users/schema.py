@@ -13,12 +13,12 @@ class UserType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    user = graphene.Field(UserType, id=graphene.Int())
+    user = graphene.Field(UserType, email=graphene.String())
     me = graphene.Field(UserType)
 
-    def resolve_user(self, info, id):
+    def resolve_user(self, info, email):
         tmp = get_user_model()
-        return tmp.objects.get(id=id)
+        return tmp.objects.get(email=email)
 
     def resolve_me(self, info):
         user = info.context.user

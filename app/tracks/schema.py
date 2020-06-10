@@ -123,7 +123,8 @@ class Query(graphene.ObjectType):
                 Q(title__icontains=search) |
                 Q(artist__icontains=search) |
                 Q(album__icontains=search) |
-                Q(posted_by__username=search)
+                Q(posted_by__username=search) |
+                Q(posted_by__email=search)
 
             )
             return Track.objects.filter(filter)

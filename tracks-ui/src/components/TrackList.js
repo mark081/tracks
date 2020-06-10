@@ -50,7 +50,8 @@ class TrackList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { tracks: state.tracks }; //posts is defined in call to CombineReducers
+
+  return { tracks: state.tracks }; //tracks is defined in call to CombineReducers
 };
 
 export default connect(mapStateToProps, { getDataAction, selectTrackAction })(TrackList); //Action creator

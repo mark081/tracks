@@ -17,11 +17,11 @@ const GET_TRACKS_QUERY = gql`
       artist
       album
       postedBy {
-        id
+        email
       }
       likes {
         user {
-          id
+          email
         }
       }
     }
@@ -29,8 +29,8 @@ const GET_TRACKS_QUERY = gql`
 `;
 
 const GET_USER_QUERY = gql`
-  query GetUser($id: Int) {
-    user(id: $id) {
+  query GetUser($email: String) {
+    user(email: $email) {
       username
       id
       dateJoined
@@ -60,11 +60,10 @@ const GET_USER_QUERY = gql`
  *
  */
 
-const _memoGetUserAction = _.memoize(async (id, dispatch) => {
-  console.log(id);
+const _memoGetUserAction = _.memoize(async (email, dispatch) => {
   const { data } = await gqlClient.query({
     query: GET_USER_QUERY,
-    variables: { id: id },
+    variables: { email },
   });
   let user = { ...data.user, avatar: faker.image.avatar() }; //Little placeholder until photos are in
   dispatch({
@@ -73,9 +72,9 @@ const _memoGetUserAction = _.memoize(async (id, dispatch) => {
   });
 });
 
-export const getUserAction = (id) => {
+export const getUserAction = (email) => {
   return async (dispatch) => {
-    _memoGetUserAction(id, dispatch);
+    _memoGetUserAction(email, dispatch);
   };
 };
 
@@ -95,5 +94,21 @@ export const selectTrackAction = (track) => {
   return {
     type: "GET_TRACK",
     payload: track,
+  };
+};
+
+// Fire this action when the user logs in or logs out
+
+export const authChangeAction = (
+  authenticated,
+  userId = null,
+  email = null
+) => {
+  if (!authenticated) {
+    userId =  email = null
+  }
+  return {
+    type: "AUTH_CHANGE",
+    payload: { isSignedIn: authenticated, currentUser: userId, email },
   };
 };

@@ -19,30 +19,33 @@ import { getUserAction } from "../actions";
 
 class User extends React.Component {
   componentDidMount = () => {
-    this.props.getUserAction(this.props.userId); //Call an action to get the user information
+    this.props.getUserAction(this.props.email); //Call an action to get the user information
   };
 
   componentDidUpdate = () => {
-    this.props.getUserAction(this.props.userId); //Call an action to get the user information
+    this.props.getUserAction(this.props.email); //Call an action to get the user information
   };
 
   render = () => {
     if (this.props.user) {
-      const {avatar, username, dateJoined,email} = this.props.user
+      const { avatar, username, dateJoined, email } = this.props.user;
       return (
         <div className="comment">
           <a href="/" className="avatar">
             <img alt="avatar" src={avatar} />
           </a>
           <div className="content">
-        <div className="author">
-          <h4>Posted by {username}</h4>
-        </div>
-        <div className="metadata">
-          User since <span className="date">{new Date(dateJoined).toDateString()}</span>
-        </div>
-        <div className="email">{email}</div>
-      </div>          
+            <div className="author">
+              <h4>Posted by {username}</h4>
+            </div>
+            <div className="metadata">
+              User since{" "}
+              <span className="date">
+                {new Date(dateJoined).toDateString()}
+              </span>
+            </div>
+            <div className="email">{email}</div>
+          </div>
         </div>
       );
     } else return <div>Wait a sec</div>;
@@ -50,7 +53,7 @@ class User extends React.Component {
 }
 const mapStateToProps = (state, ownProps) => {
   //mapStateToProps can take an optional second parameter - the existing props
-  return { user: state.users.find((user) => user.id === ownProps.userId) }; //Should be here since AC was called
+  return { user: state.users.find((user) => user.email === ownProps.email) }; //Should be here since AC was called
 };
 
 export default connect(mapStateToProps, { getUserAction })(User);

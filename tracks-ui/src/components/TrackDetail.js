@@ -17,7 +17,7 @@ class TrackDetail extends React.Component {
             <br />
             Artist: {artist}
           </p>
-          <User userId={postedBy.id} />
+          <User email={postedBy.email} />
         </div>
       );
     } else {
