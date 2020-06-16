@@ -19,7 +19,7 @@ class GoogleAuth extends React.Component {
           //3. Pass the sign-in status to the action creator - Question: Can the user ever be logged in here?
           this.props.authChangeAction(
             this.auth.isSignedIn.get(),
-            this.auth.currentUser.get().getId(),
+            this.auth.currentUser.get().getId()
           );
           //4. Pass our event handler to the listener
           this.auth.isSignedIn.listen(this.onAuthChange);
@@ -27,6 +27,10 @@ class GoogleAuth extends React.Component {
     });
   }
 
+  hlpSignOut = () => {
+    this.auth.signOut();
+    this.auth.disconnect();
+  };
   onAuthChange = () => {
     this.props.authChangeAction(
       this.auth.isSignedIn.get(),
@@ -39,7 +43,7 @@ class GoogleAuth extends React.Component {
       return null;
     } else if (this.props.isSignedIn) {
       return (
-        <button className="ui red google button" onClick={this.auth.signOut}>
+        <button className="ui red google button" onClick={this.hlpSignOut}>
           <i className="google icon" />
           Sign Out
         </button>

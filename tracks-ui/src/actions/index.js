@@ -47,6 +47,13 @@ const GET_USER_QUERY = gql`
   }
 `;
 
+const GET_JWT_MUTATION = gql`
+mutation GetJWT($username: String){
+  tokenAuth(username: $username, password: "password") {
+    token
+  }
+}`
+
 /**
  *
  * REDUX Actions: all data that comes to Resolvers must come from actions
