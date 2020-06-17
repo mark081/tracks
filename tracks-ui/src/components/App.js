@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import TrackList from "./TrackList";
 import TrackDetail from "./TrackDetail";
 import Header from "./Header";
-import CreateTrack from "./CreateTrack";
+import TrackCreate from "./TrackCreate";
 
 
 const hlpRender = () => {
@@ -27,7 +27,7 @@ const App = () => {
       <div>
         <Header />
         <Route path="/" exact component={hlpRender}></Route>
-        <Route path="/track/create" exact component={CreateTrack}></Route>
+        <Route path="/track/create" exact component={TrackCreate}></Route>
       </div>
     </BrowserRouter>
   </div>;

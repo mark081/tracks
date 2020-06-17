@@ -87,13 +87,11 @@ export const getUserAction = (email) => {
 };
 
 const _memoGetUserJWTAction = _.memoize(async (username, dispatch) => {
-  console.log("_memoGetUserJWTAction");
   const { data } = await gqlClient.mutate({
     mutation: GET_JWT_MUTATION,
     variables: { username },
   });
   const { tokenAuth } = data;
-  console.log(tokenAuth.token);
   dispatch({
     type: "GET_JWT",
     payload: { jwt: tokenAuth.token },

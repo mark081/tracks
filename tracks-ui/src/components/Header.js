@@ -36,6 +36,9 @@ class Header extends React.Component {
           <Link to="/" className="ui item">
             List Tracks
           </Link>
+          <Link to="/track/create" className="ui item">
+            Create Track
+          </Link>
           <Auth />
         </div>
       </div>

@@ -6,7 +6,6 @@ import GoogleAuth from "./GoogleAuth";
 
 class Auth extends React.Component {
   componentDidUpdate() {
-    console.log(this.props);
    if (typeof this.props.user !== 'undefined') this.props.getJWTAction(this.props.user.username);
   }
   render() {
