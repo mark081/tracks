@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import GoogleAuth from "./GoogleAuth";
+import Auth from "./Auth";
 import { getUserAction } from "../actions";
 
 class Header extends React.Component {
@@ -13,14 +13,12 @@ class Header extends React.Component {
   };
 
   componentDidUpdate = () => {
-    console.log("componentDidUpdate");
     if (this.props.email) {
       this.props.getUserAction(this.props.email);
     }
   };
 
   displayGreeting() {
-    console.log(this.props);
     if (this.props.user) {
       return <div>Welcome {this.props.user.username}</div>;
     } else {
@@ -29,7 +27,6 @@ class Header extends React.Component {
   }
 
   render() {
-    console.log('Render')
     return (
       <div className="ui secondary pointing menu">
         <div className="left menu">
@@ -39,7 +36,7 @@ class Header extends React.Component {
           <Link to="/" className="ui item">
             List Tracks
           </Link>
-          <GoogleAuth />
+          <Auth />
         </div>
       </div>
     );

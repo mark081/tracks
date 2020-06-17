@@ -16,11 +16,14 @@ class GoogleAuth extends React.Component {
         .then(() => {
           //2. Get the authentication object
           this.auth = window.gapi.auth2.getAuthInstance();
-          //3. Pass the sign-in status to the action creator - Question: Can the user ever be logged in here?
-          this.props.authChangeAction(
-            this.auth.isSignedIn.get(),
-            this.auth.currentUser.get().getId()
-          );
+          //3. Pass the sign-in status to the action creator
+          if (this.auth.isSignedIn.get()) {
+            this.props.authChangeAction(
+              this.auth.isSignedIn.get(),
+              this.auth.currentUser.get().getId(),
+              this.auth.currentUser.get().getBasicProfile().getEmail()
+            );
+          } else this.props.authChangeAction(false)
           //4. Pass our event handler to the listener
           this.auth.isSignedIn.listen(this.onAuthChange);
         });
@@ -29,15 +32,22 @@ class GoogleAuth extends React.Component {
 
   hlpSignOut = () => {
     this.auth.signOut();
-    this.auth.disconnect();
+    // this.auth.disconnect();
+    this.props.authChangeAction(false);
   };
   onAuthChange = () => {
-    this.props.authChangeAction(
-      this.auth.isSignedIn.get(),
-      this.auth.currentUser.get().getId(),
-      this.auth.currentUser.get().getBasicProfile().getEmail()
-    );
+    const loggedIn = this.auth.isSignedIn.get();
+    if (loggedIn) {
+      this.props.authChangeAction(
+        this.auth.isSignedIn.get(),
+        this.auth.currentUser.get().getId(),
+        this.auth.currentUser.get().getBasicProfile().getEmail()
+      );
+    } else {
+      this.props.authChangeAction(this.auth.isSignedIn.get());
+    }
   };
+
   renderAuthButton() {
     if (this.props.isSignedIn === null) {
       return null;
@@ -64,7 +74,11 @@ class GoogleAuth extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isSignedIn: state.authState.isSignedIn };
+  return {
+    isSignedIn: state.authState.isSignedIn,
+  };
 };
 
-export default connect(mapStateToProps, { authChangeAction })(GoogleAuth);
+export default connect(mapStateToProps, {
+  authChangeAction,
+})(GoogleAuth);

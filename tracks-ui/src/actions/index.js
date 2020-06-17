@@ -48,11 +48,12 @@ const GET_USER_QUERY = gql`
 `;
 
 const GET_JWT_MUTATION = gql`
-mutation GetJWT($username: String){
-  tokenAuth(username: $username, password: "password") {
-    token
+  mutation GetJWT($username: String!) {
+    tokenAuth(username: $username, password: "password") {
+      token
+    }
   }
-}`
+`;
 
 /**
  *
@@ -85,6 +86,26 @@ export const getUserAction = (email) => {
   };
 };
 
+const _memoGetUserJWTAction = _.memoize(async (username, dispatch) => {
+  console.log("_memoGetUserJWTAction");
+  const { data } = await gqlClient.mutate({
+    mutation: GET_JWT_MUTATION,
+    variables: { username },
+  });
+  const { tokenAuth } = data;
+  console.log(tokenAuth.token);
+  dispatch({
+    type: "GET_JWT",
+    payload: { jwt: tokenAuth.token },
+  });
+});
+
+export const getJWTAction = (username) => {
+  return async (dispatch) => {
+    _memoGetUserJWTAction(username, dispatch);
+  };
+};
+
 export const getDataAction = () => {
   return async (dispatch) => {
     const { data } = await gqlClient.query({
@@ -109,13 +130,14 @@ export const selectTrackAction = (track) => {
 export const authChangeAction = (
   authenticated,
   userId = null,
-  email = null
+  email = null,
+  jwt = null
 ) => {
   if (!authenticated) {
-    userId =  email = null
+    userId = email = jwt = null;
   }
   return {
     type: "AUTH_CHANGE",
-    payload: { isSignedIn: authenticated, currentUser: userId, email },
+    payload: { isSignedIn: authenticated, currentUser: userId, email, jwt },
   };
 };
