@@ -55,6 +55,28 @@ const GET_JWT_MUTATION = gql`
   }
 `;
 
+const CREATE_TRACK_MUTATION = gql`
+  mutation createTrack($album: String, $artist: String, $title: String) {
+    createTrack(album: $album, artist: $artist, title: $title) {
+      track {
+        id
+        title
+        artist
+        album
+        createdAt
+        postedBy {
+          email
+        }
+        likes {
+          user {
+            email
+          }
+        }
+      }
+    }
+  }
+`;
+
 /**
  *
  * REDUX Actions: all data that comes to Resolvers must come from actions
@@ -67,7 +89,31 @@ const GET_JWT_MUTATION = gql`
  * all requests anyway and I have no friggin idea how to turn that off - Note: If you suggest fetchPolicy:"no-cache" I will have to hurt you.
  *
  */
+const _memoCreateTrackAction = _.memoize(
+  async (token, title, artist, album, dispatch) => {
+    console.log(token);
+    const { data } = await gqlClient.mutate({
+      mutation: CREATE_TRACK_MUTATION,
+      variables: { title, artist, album },
+      context: {
+        headers: {
+          Authorization: token,
+        },
+      },
+    });
+    const { track } = data;
+    dispatch({
+      type: "CREATE_TRACK",
+      payload: { track: track },
+    });
+  }
+);
 
+export const createTrackAction = (token, title, artist, album) => {
+  return (dispatch) => {
+    _memoCreateTrackAction(token, title, artist, album, dispatch);
+  };
+};
 const _memoGetUserAction = _.memoize(async (email, dispatch) => {
   const { data } = await gqlClient.query({
     query: GET_USER_QUERY,
@@ -81,12 +127,12 @@ const _memoGetUserAction = _.memoize(async (email, dispatch) => {
 });
 
 export const getUserAction = (email) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     _memoGetUserAction(email, dispatch);
   };
 };
 
-const _memoGetUserJWTAction = _.memoize(async (username, dispatch) => {
+const _memoGetUserJWTAction = async (username, dispatch) => {
   const { data } = await gqlClient.mutate({
     mutation: GET_JWT_MUTATION,
     variables: { username },
@@ -96,10 +142,10 @@ const _memoGetUserJWTAction = _.memoize(async (username, dispatch) => {
     type: "GET_JWT",
     payload: { jwt: tokenAuth.token },
   });
-});
+};
 
 export const getJWTAction = (username) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     _memoGetUserJWTAction(username, dispatch);
   };
 };

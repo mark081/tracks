@@ -1,5 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createTrackAction } from "../actions";
 
 class TrackCreate extends React.Component {
   renderInput({ input, label, meta }) {
@@ -7,21 +9,22 @@ class TrackCreate extends React.Component {
       <div className="field">
         <label>{label}</label>
         <input {...input} autoComplete="off" />
-        {/* meta gives us, among otherthings the ability to see if the user has touched the field yet */}
+        {/* 3. meta gives us, among otherthings the ability to see if the user has touched the field yet */}
         <div style={{ color: "red" }}>
           {meta.touched === true ? meta.error : ""}
         </div>
       </div>
     );
   }
-  onSubmit(values) {
-    console.log(values)
-  }
+  onSubmit = ({ album, title, artist }) => {
+    this.props.createTrackAction(this.props.token, artist, album, title);
+  };
   render() {
     const { handleSubmit } = this.props;
+    //handleSubmit need to be the method called onSubmit - passing in your handler as a callback
     return (
       <form onSubmit={handleSubmit(this.onSubmit)} className="ui form">
-        {/* component must be the render function */}
+        {/* 2. component must be the render function */}
         <Field
           name="title"
           component={this.renderInput}
@@ -32,16 +35,41 @@ class TrackCreate extends React.Component {
           component={this.renderInput}
           label="Enter Artist"
         />
-        <Field
-          name="album"
-          component={this.renderInput}
-          label="Enter Album"
-        />
-        <button className="ui button">Submit</button>        
+        <Field name="album" component={this.renderInput} label="Enter Album" />
+        <button className="ui button">Submit</button>
       </form>
     );
   }
 }
 
-//1. reduxForm() takes the place of Connect() - Note {form:"foo"} is mandatory and "foo" will tie everything together
-export default reduxForm({ form: "trackCreate" })(TrackCreate);
+const validate = (values) => {
+  const errors = {};
+  if (!values.title) {
+    errors.title = "You must enter a title";
+  }
+  if (!values.artist) {
+    errors.artist = "You must enter an artist";
+  }
+  if (!values.album) {
+    errors.album = "You must enter an album";
+  }
+  return errors;
+};
+
+//1. reduxForm() is a decorator similar to Connect() - Note {form:"foo"} is mandatory and "foo" will tie everything together
+//but the order we apply the decorators depends on what context each requires
+
+// const inter = reduxForm({ form: "trackCreate" })(TrackCreate);
+
+// @connect(null, {createTrackAction})
+// @reduxForm({ form: "trackCreate" })
+
+const mapStateToProps = (state) => {
+  return {
+    token: `JWT ${state.authState.jwt}`,
+  };
+};
+
+export default connect(mapStateToProps, { createTrackAction })(
+  reduxForm({ form: "trackCreate", validate })(TrackCreate)
+);

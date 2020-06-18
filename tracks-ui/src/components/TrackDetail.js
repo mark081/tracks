@@ -2,6 +2,7 @@ import User from "./User";
 import React from "react";
 import { connect } from "react-redux";
 
+
 class TrackDetail extends React.Component {
   render = () => {
     if (this.props.track.id) {

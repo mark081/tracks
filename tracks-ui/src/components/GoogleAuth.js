@@ -23,7 +23,7 @@ class GoogleAuth extends React.Component {
               this.auth.currentUser.get().getId(),
               this.auth.currentUser.get().getBasicProfile().getEmail()
             );
-          } else this.props.authChangeAction(false)
+          } else this.props.authChangeAction(false);
           //4. Pass our event handler to the listener
           this.auth.isSignedIn.listen(this.onAuthChange);
         });
@@ -36,6 +36,7 @@ class GoogleAuth extends React.Component {
     this.props.authChangeAction(false);
   };
   onAuthChange = () => {
+    console.log(this.props);
     const loggedIn = this.auth.isSignedIn.get();
     if (loggedIn) {
       this.props.authChangeAction(
