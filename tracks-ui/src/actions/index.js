@@ -16,6 +16,7 @@ const GET_TRACKS_QUERY = gql`
       title
       artist
       album
+      createdAt
       postedBy {
         email
       }
@@ -89,29 +90,48 @@ const CREATE_TRACK_MUTATION = gql`
  * all requests anyway and I have no friggin idea how to turn that off - Note: If you suggest fetchPolicy:"no-cache" I will have to hurt you.
  *
  */
-const _memoCreateTrackAction = _.memoize(
-  async (token, title, artist, album, dispatch) => {
-    console.log(token);
-    const { data } = await gqlClient.mutate({
-      mutation: CREATE_TRACK_MUTATION,
-      variables: { title, artist, album },
-      context: {
-        headers: {
-          Authorization: token,
-        },
+const _hlprCreateTrackAction = async (
+  token,
+  title,
+  artist,
+  album,
+  dispatch
+) => {
+  const { data } = await gqlClient.mutate({
+    mutation: CREATE_TRACK_MUTATION,
+    variables: { title, artist, album },
+    context: {
+      headers: {
+        Authorization: token,
       },
-    });
-    const { track } = data;
-    dispatch({
-      type: "CREATE_TRACK",
-      payload: { track: track },
-    });
-  }
-);
+    },
+  });
+  const { createTrack } = data;
+
+  const { cache } = gqlClient;
+
+  dispatch({
+    type: "CREATE_TRACK",
+    payload: createTrack.track,
+  });
+
+  const cachedData = cache.readQuery({
+    query: GET_TRACKS_QUERY,
+  });
+  /*
+   * We're going to directly update the cache here. This may not help us long term -
+   */
+  const tracks = [...cachedData.tracks, createTrack.track];
+
+  cache.writeQuery({
+    query: GET_TRACKS_QUERY,
+    data: { tracks },
+  });
+};
 
 export const createTrackAction = (token, title, artist, album) => {
   return (dispatch) => {
-    _memoCreateTrackAction(token, title, artist, album, dispatch);
+    _hlprCreateTrackAction(token, title, artist, album, dispatch);
   };
 };
 const _memoGetUserAction = _.memoize(async (email, dispatch) => {
@@ -140,7 +160,7 @@ const _memoGetUserJWTAction = async (username, dispatch) => {
   const { tokenAuth } = data;
   dispatch({
     type: "GET_JWT",
-    payload: { jwt: tokenAuth.token },
+    payload: { jwt: `JWT ${tokenAuth.token}` },
   });
 };
 

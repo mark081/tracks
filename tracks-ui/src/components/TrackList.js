@@ -27,7 +27,7 @@ class TrackList extends React.Component {
   hlpRender() {
     const tracks = this.props.tracks.map((track) => {
       return (
-        <div className="ui item" key={track.title}>
+        <div className="ui item" key={track.id}>
           <div className="ui right floated content">
             <button
               className="ui button primary"

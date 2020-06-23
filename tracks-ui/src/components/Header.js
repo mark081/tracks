@@ -54,4 +54,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getUserAction })(Header);
+export default connect(mapStateToProps, { getUserAction: getUserAction })(Header);

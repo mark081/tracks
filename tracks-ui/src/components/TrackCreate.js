@@ -1,6 +1,8 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import { createTrackAction } from "../actions";
 
 class TrackCreate extends React.Component {
@@ -17,7 +19,8 @@ class TrackCreate extends React.Component {
     );
   }
   onSubmit = ({ album, title, artist }) => {
-    this.props.createTrackAction(this.props.token, artist, album, title);
+    this.props.createTrackAction(this.props.token, title, artist, album);
+    this.props.history.push("/");
   };
   render() {
     const { handleSubmit } = this.props;
@@ -56,20 +59,14 @@ const validate = (values) => {
   return errors;
 };
 
-//1. reduxForm() is a decorator similar to Connect() - Note {form:"foo"} is mandatory and "foo" will tie everything together
-//but the order we apply the decorators depends on what context each requires
-
-// const inter = reduxForm({ form: "trackCreate" })(TrackCreate);
-
-// @connect(null, {createTrackAction})
-// @reduxForm({ form: "trackCreate" })
-
 const mapStateToProps = (state) => {
   return {
-    token: `JWT ${state.authState.jwt}`,
+    token: state.authState.jwt,
   };
 };
 
-export default connect(mapStateToProps, { createTrackAction })(
-  reduxForm({ form: "trackCreate", validate })(TrackCreate)
+export default withRouter(
+  connect(mapStateToProps, { createTrackAction })(
+    reduxForm({ form: "trackCreate", validate })(TrackCreate)
+  )
 );
