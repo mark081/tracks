@@ -129,7 +129,7 @@ const _hlprCreateTrackAction = async (
       data: { tracks },
     });
   } catch (error) {
-    console.log(error);
+    console.log(`TODO: Disable Create Track if not logged in [${error}]`);
   }
 };
 
