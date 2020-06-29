@@ -97,36 +97,40 @@ const _hlprCreateTrackAction = async (
   album,
   dispatch
 ) => {
-  const { data } = await gqlClient.mutate({
-    mutation: CREATE_TRACK_MUTATION,
-    variables: { title, artist, album },
-    context: {
-      headers: {
-        Authorization: token,
+  try {
+    const { data } = await gqlClient.mutate({
+      mutation: CREATE_TRACK_MUTATION,
+      variables: { title, artist, album },
+      context: {
+        headers: {
+          Authorization: token,
+        },
       },
-    },
-  });
-  const { createTrack } = data;
+    });
+    const { createTrack } = data;
 
-  const { cache } = gqlClient;
+    const { cache } = gqlClient;
 
-  dispatch({
-    type: "CREATE_TRACK",
-    payload: createTrack.track,
-  });
+    dispatch({
+      type: "CREATE_TRACK",
+      payload: createTrack.track,
+    });
 
-  const cachedData = cache.readQuery({
-    query: GET_TRACKS_QUERY,
-  });
-  /*
-   * We're going to directly update the cache here. This may not help us long term -
-   */
-  const tracks = [...cachedData.tracks, createTrack.track];
+    const cachedData = cache.readQuery({
+      query: GET_TRACKS_QUERY,
+    });
+    /*
+     * We're going to directly update the cache here. This may not help us long term -
+     */
+    const tracks = [...cachedData.tracks, createTrack.track];
 
-  cache.writeQuery({
-    query: GET_TRACKS_QUERY,
-    data: { tracks },
-  });
+    cache.writeQuery({
+      query: GET_TRACKS_QUERY,
+      data: { tracks },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const createTrackAction = (token, title, artist, album) => {
