@@ -26,22 +26,50 @@ class Header extends React.Component {
     }
   }
 
+  //   render() {
+  //     return (
+  //       <div className="ui secondary pointing menu">
+  //         <div className="left menu">
+  //           <div className="ui item">{this.displayGreeting()}</div>
+  //         </div>
+  //         <div className="right menu">
+  //           <Link to="/" className="ui item">
+  //             List Tracks
+  //           </Link>
+  //           <Link to="/track/create" className="ui item">
+  //             Create Track
+  //           </Link>
+  //           <Auth />
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
+
   render() {
     return (
-      <div className="ui secondary pointing menu">
-        <div className="left menu">
-          <div className="ui item">{this.displayGreeting()}</div>
-        </div>
-        <div className="right menu">
-          <Link to="/" className="ui item">
-            List Tracks
-          </Link>
-          <Link to="/track/create" className="ui item">
-            Create Track
-          </Link>
-          <Auth />
-        </div>
-      </div>
+      <header className="page-header">
+        <h1 id="page-title" className="title">
+          {this.displayGreeting()}
+        </h1>
+        <nav>
+          <ul id="main-nav">
+            <li>
+              <Link to="/" className="link">
+                List Tracks
+              </Link>
+            </li>
+            <li>
+              <Link to="/track/create" className="link">
+                Create Track
+              </Link>
+            </li>
+            <li>
+            <Auth className="auth"/>
+            </li>
+          </ul>
+        </nav>
+      </header>
     );
   }
 }
@@ -54,4 +82,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getUserAction: getUserAction })(Header);
+export default connect(mapStateToProps, { getUserAction: getUserAction })(
+  Header
+);

@@ -1,0 +1,42 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  color: #2f4f4f;
+  margin-bottom: 10px;
+}
+#main-nav {
+  margin-top: 10px;
+  list-style: none;
+  padding-left: 0;
+}
+
+#main-nav li {
+  display: inline-block;
+}
+
+#main-nav .link:hover {
+  padding: 10px;
+}
+
+#main-nav .link {
+  color: white;
+  background-color: #13a4a4;
+  padding: 5px;
+  border-radius: 2px;
+  text-decoration: none;
+  margin: 2px;
+}
+
+#main-nav button {
+  color: white;
+  padding: 7px;
+  border-radius: 2px;
+  text-decoration: none;
+  margin: 2px;
+}
+
+#main-nav button:hover {
+  padding: 10px;
+}

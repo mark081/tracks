@@ -32,7 +32,7 @@ class GoogleAuth extends React.Component {
 
   hlpSignOut = () => {
     this.auth.signOut();
-    // this.auth.disconnect();
+    this.auth.disconnect();
     this.props.authChangeAction(false);
   };
   onAuthChange = () => {
@@ -60,7 +60,10 @@ class GoogleAuth extends React.Component {
       );
     } else {
       return (
-        <button className="ui green google button" onClick={this.auth.signIn}>
+        <button
+          className="ui green google button"
+          onClick={this.auth.signIn}
+        >
           <i className="google icon" />
           Sign In With Google
         </button>
