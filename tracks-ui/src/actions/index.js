@@ -134,16 +134,21 @@ export const createTrackAction = (token, title, artist, album) => {
     _hlprCreateTrackAction(token, title, artist, album, dispatch);
   };
 };
+
 const _memoGetUserAction = _.memoize(async (email, dispatch) => {
-  const { data } = await gqlClient.query({
-    query: GET_USER_QUERY,
-    variables: { email },
-  });
-  let user = { ...data.user, avatar: faker.image.avatar() }; //Little placeholder until photos are in
-  dispatch({
-    type: "GET_USER",
-    payload: user,
-  });
+  try {
+    const { data } = await gqlClient.query({
+      query: GET_USER_QUERY,
+      variables: { email },
+    });
+    let user = { ...data.user, avatar: faker.image.avatar() }; //Little placeholder until photos are in
+    dispatch({
+      type: "GET_USER",
+      payload: user,
+    });
+  } catch (err) {
+    console.log("TODO: Prompt To Create User");
+  }
 });
 
 export const getUserAction = (email) => {
