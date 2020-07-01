@@ -1,0 +1,72 @@
+== Info: Closing connection -1
+== Info:   Trying 192.168.1.7...
+== Info: TCP_NODELAY set
+== Info: Connected to 192.168.1.7 (192.168.1.7) port 8002 (#0)
+=> Send header, 159 bytes (0x9f)
+0000: 50 4f 53 54 20 2f 67 72 61 70 68 71 6c 2f 20 48 POST /graphql/ H
+0010: 54 54 50 2f 31 2e 31 0d 0a 48 6f 73 74 3a 20 31 TTP/1.1..Host: 1
+0020: 39 32 2e 31 36 38 2e 31 2e 37 3a 38 30 30 32 0d 92.168.1.7:8002.
+0030: 0a 55 73 65 72 2d 41 67 65 6e 74 3a 20 63 75 72 .User-Agent: cur
+0040: 6c 2f 37 2e 36 34 2e 31 0d 0a 41 63 63 65 70 74 l/7.64.1..Accept
+0050: 3a 20 2a 2f 2a 0d 0a 43 6f 6e 74 65 6e 74 2d 4c : */*..Content-L
+0060: 65 6e 67 74 68 3a 20 31 31 37 0d 0a 43 6f 6e 74 ength: 117..Cont
+0070: 65 6e 74 2d 54 79 70 65 3a 20 61 70 70 6c 69 63 ent-Type: applic
+0080: 61 74 69 6f 6e 2f 78 2d 77 77 77 2d 66 6f 72 6d ation/x-www-form
+0090: 2d 75 72 6c 65 6e 63 6f 64 65 64 0d 0a 0d 0a    -urlencoded....
+=> Send data, 117 bytes (0x75)
+0000: 7b 22 71 75 65 72 79 22 3a 20 22 6d 75 74 61 74 {"query": "mutat
+0010: 69 6f 6e 20 7b 63 72 65 61 74 65 55 73 65 72 28 ion {createUser(
+0020: 65 6d 61 69 6c 3a 20 5c 22 62 6f 62 62 79 40 62 email: \"bobby@b
+0030: 72 61 64 79 2e 63 6f 6d 5c 22 20 70 61 73 73 77 rady.com\" passw
+0040: 6f 72 64 3a 20 5c 22 70 61 73 73 77 6f 72 64 5c ord: \"password\
+0050: 22 20 75 73 65 72 6e 61 6d 65 3a 20 5c 22 62 6f " username: \"bo
+0060: 62 62 79 5c 22 29 20 7b 75 73 65 72 20 7b 69 64 bby\") {user {id
+0070: 7d 7d 7d 22 7d                                  }}}"}
+== Info: upload completely sent off: 117 out of 117 bytes
+<= Recv header, 26 bytes (0x1a)
+0000: 48 54 54 50 2f 31 2e 31 20 34 30 30 20 42 61 64 HTTP/1.1 400 Bad
+0010: 20 52 65 71 75 65 73 74 0d 0a                    Request..
+<= Recv header, 37 bytes (0x25)
+0000: 44 61 74 65 3a 20 57 65 64 2c 20 30 31 20 4a 75 Date: Wed, 01 Ju
+0010: 6c 20 32 30 32 30 20 30 30 3a 31 39 3a 35 39 20 l 2020 00:19:59 
+0020: 47 4d 54 0d 0a                                  GMT..
+<= Recv header, 38 bytes (0x26)
+0000: 53 65 72 76 65 72 3a 20 57 53 47 49 53 65 72 76 Server: WSGIServ
+0010: 65 72 2f 30 2e 32 20 43 50 79 74 68 6f 6e 2f 33 er/0.2 CPython/3
+0020: 2e 38 2e 32 0d 0a                               .8.2..
+<= Recv header, 32 bytes (0x20)
+0000: 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 61 70 Content-Type: ap
+0010: 70 6c 69 63 61 74 69 6f 6e 2f 6a 73 6f 6e 0d 0a plication/json..
+<= Recv header, 22 bytes (0x16)
+0000: 56 61 72 79 3a 20 43 6f 6f 6b 69 65 2c 20 4f 72 Vary: Cookie, Or
+0010: 69 67 69 6e 0d 0a                               igin..
+<= Recv header, 23 bytes (0x17)
+0000: 58 2d 46 72 61 6d 65 2d 4f 70 74 69 6f 6e 73 3a X-Frame-Options:
+0010: 20 44 45 4e 59 0d 0a                             DENY..
+<= Recv header, 33 bytes (0x21)
+0000: 58 2d 43 6f 6e 74 65 6e 74 2d 54 79 70 65 2d 4f X-Content-Type-O
+0010: 70 74 69 6f 6e 73 3a 20 6e 6f 73 6e 69 66 66 0d ptions: nosniff.
+0020: 0a                                              .
+<= Recv header, 20 bytes (0x14)
+0000: 43 6f 6e 74 65 6e 74 2d 4c 65 6e 67 74 68 3a 20 Content-Length: 
+0010: 35 33 0d 0a                                     53..
+<= Recv header, 168 bytes (0xa8)
+0000: 53 65 74 2d 43 6f 6f 6b 69 65 3a 20 20 63 73 72 Set-Cookie:  csr
+0010: 66 74 6f 6b 65 6e 3d 31 62 36 37 68 4f 72 4c 32 ftoken=1b67hOrL2
+0020: 63 56 4b 74 64 6e 4f 45 6b 4a 50 35 75 45 4c 6f cVKtdnOEkJP5uELo
+0030: 34 63 46 6c 6d 69 74 70 6c 67 31 75 42 34 34 4c 4cFlmitplg1uB44L
+0040: 4c 77 4a 54 4e 44 34 4d 6f 62 6d 48 59 39 71 73 LwJTND4MobmHY9qs
+0050: 62 36 63 66 50 69 52 3b 20 65 78 70 69 72 65 73 b6cfPiR; expires
+0060: 3d 57 65 64 2c 20 33 30 20 4a 75 6e 20 32 30 32 =Wed, 30 Jun 202
+0070: 31 20 30 30 3a 31 39 3a 35 39 20 47 4d 54 3b 20 1 00:19:59 GMT; 
+0080: 4d 61 78 2d 41 67 65 3d 33 31 34 34 39 36 30 30 Max-Age=31449600
+0090: 3b 20 50 61 74 68 3d 2f 3b 20 53 61 6d 65 53 69 ; Path=/; SameSi
+00a0: 74 65 3d 4c 61 78 0d 0a                         te=Lax..
+<= Recv header, 2 bytes (0x2)
+0000: 0d 0a                                           ..
+<= Recv data, 53 bytes (0x35)
+0000: 7b 22 65 72 72 6f 72 73 22 3a 5b 7b 22 6d 65 73 {"errors":[{"mes
+0010: 73 61 67 65 22 3a 22 4d 75 73 74 20 70 72 6f 76 sage":"Must prov
+0020: 69 64 65 20 71 75 65 72 79 20 73 74 72 69 6e 67 ide query string
+0030: 2e 22 7d 5d 7d                                  ."}]}
+== Info: Connection #0 to host 192.168.1.7 left intact
