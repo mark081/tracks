@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # curl -i -H 'Content-Type: application/json' -H "Authorization: bearer myGithubAccessToken" -X POST -d '{"query": "query {repository(owner: \"wso2\", name: \"product-is\") {description}}"}' $1
 
 DJANGO_SERVER=$1
@@ -33,4 +33,4 @@ function makeUser {
 while read -r email user album artist title
 do
     makeUser $email $user $album $artist $title $DJANGO_SERVER
-done < _seed_data.cfg
+done < ./config/_seed_data.cfg
