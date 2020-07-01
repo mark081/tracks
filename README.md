@@ -1,6 +1,8 @@
 # Tracks
 ## GraphQL (Graphene Django) Service and React.js frontend to Manage music and Lyrics
 
+![Logo](Screen Shot 2020-07-01 at 3.14.40 PM.png)
+
 Currently there is Docker support to run the GraphQL backend (front-end server coming soon)
 
 1. Get the Repo 
