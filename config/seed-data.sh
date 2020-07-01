@@ -24,7 +24,7 @@ function makeUser {
     echo ""
     echo "Adding Track"
     echo ""
-    curl -i -H "Content-Type:application/json" -H "Authorization:JWT "$JWT -d '{"query": "mutation {createTrack(album: '$ALBUM' artist: '$ARTIST' title: '$TITLE') {track {id}}}"}'$HOSTNAME
+    curl -i -H "Content-Type:application/json" -H "Authorization:JWT "$JWT -d '{"query": "mutation {createTrack(album: '$ALBUM' artist: '$ARTIST' title: '$TITLE') {track {id}}}"}' $HOSTNAME
 
 
 

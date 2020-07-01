@@ -152,6 +152,7 @@ const _memoGetUserAction = _.memoize(async (email, dispatch) => {
     });
   } catch (err) {
     console.log("TODO: Prompt To Create User");
+    console.log(err);
   }
 });
 
