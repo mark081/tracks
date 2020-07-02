@@ -16,17 +16,12 @@ git clone git@github.com:mark081/tracks.git
 cd tracks
 ```
 
-3. Create the local DB
-```
-docker-compose run web python app/manage.py migrate
-```
-
-4. Fire it up
+3. Fire it up
 ```
 docker-compose run -d -p 8000:8000 web
 ```
 
-5. Replace `cooper.canada@gmail` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
+5. On your local maching replace `cooper.canada@gmail` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
 
 6. Load the data
 
