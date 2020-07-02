@@ -18,7 +18,7 @@ cd tracks
 
 3. Create the local DB
 ```
-docker-compose run -p 8000:8000 web python app/manage.py migrate
+docker-compose run web python app/manage.py migrate
 ```
 
 4. Fire it up
