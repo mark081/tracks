@@ -1,5 +1,5 @@
 # Tracks
-## GraphQL (Graphene Django) Service and React.js frontend to Manage music and Lyrics
+## GraphQL (Graphene Django) Service and React.js frontend do something cool that I haven't figured out yet
 
 ![Logo](/tracks.png)
 
