@@ -21,7 +21,8 @@ cd tracks
 docker-compose run -d -p 8000:8000 web
 ```
 
-5. On your local maching replace `cooper.canada@gmail` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
+5. On your local maching replace `cooper.canada@gmail.com` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
+
 
 6. Load the data
 
