@@ -6,25 +6,21 @@
 
 Currently there is Docker support to run the GraphQL backend (front-end server coming soon)
 
-1. Get the Repo 
+1. Get the Repo and cd to the directory
 ```
 git clone git@github.com:mark081/tracks.git
-```
-
-2. Go to the directory
-```
 cd tracks
 ```
 
-3. Fire it up
+2. Fire it up
 ```
-docker-compose run -d -p 8000:8000 web
+docker-compose up --build
 ```
 
-5. On your local maching replace `cooper.canada@gmail.com` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
+3. On your local maching replace `cooper.canada@gmail.com` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
 
 
-6. Load the data
+4. Load the data
 
 ```
 cd app/dev
