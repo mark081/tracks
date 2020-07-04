@@ -1,8 +1,9 @@
 # Tracks
-## GraphQL (Graphene Django) Service and React.js frontend do something cool that I haven't figured out yet
+## GraphQL (Graphene Django) Service and React.js
 
 ![Logo](/tracks.png)
 
+(For a lesson on using docker-compose and docker using this project go to https://medium.com/@markcooper_18226/running-multiple-services-in-a-single-docker-container-59f76aee3afb?sk=9b00b4e88543d56a66a0f272a28df43c)
 
 Currently there is Docker support to run the GraphQL backend (front-end server coming soon)
 
