@@ -1,34 +1,27 @@
 # Tracks
-## GraphQL (Graphene Django) Service and React.js frontend do something cool that I haven't figured out yet
+## GraphQL (Graphene Django) Service and React.js
 
 ![Logo](/tracks.png)
 
+(For a lesson on using docker-compose and docker using this project go to https://medium.com/@markcooper_18226/running-multiple-services-in-a-single-docker-container-59f76aee3afb)
 
 Currently there is Docker support to run the GraphQL backend (front-end server coming soon)
 
-1. Get the Repo 
+1. Get the Repo and cd to the directory
 ```
 git clone git@github.com:mark081/tracks.git
-```
-
-2. Go to the directory
-```
 cd tracks
 ```
 
-3. Create the local DB
+2. Fire it up
 ```
-docker-compose run web python app/manage.py migrate
-```
-
-4. Fire it up
-```
-docker-compose run -d -p 8000:8000 web
+docker-compose up --build
 ```
 
-5. Replace `cooper.canada@gmail` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
+3. On your local machine replace `cooper.canada@gmail.com` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
 
-6. Load the data
+
+4. Load the data
 
 ```
 cd app/dev

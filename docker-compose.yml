@@ -2,12 +2,22 @@ version: '3'
 
 services:
   web:
+    image: tracks-web  
+    command: python app/manage.py runserver 0.0.0.0:8000
+    volumes: 
+      - .:/web
+    ports:
+      - "8000:8000"
+    depends_on:
+      - migration
+  migration:
     build:
       context: app/.
       dockerfile: Dockerfile
-    command: python app/manage.py runserver 0.0.0.0:8000
-    volumes: 
-      - .:/app
-    ports:
-      - "8000:8000"
+    image: tracks-web
+    working_dir: /web/app/
+    command: python manage.py migrate --noinput
+    volumes:
+      - .:/web
+
 
