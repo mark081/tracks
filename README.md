@@ -22,7 +22,8 @@ cd ..
 docker-compose up --build
 ```
 
-### 3. On your local machine replace `cooper.canada@gmail.com` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
+### 3. Add your google user
+On your local machine replace `cooper.canada@gmail.com` and `sparky` at the end of `./dev/_seed_data.cfg` with has YOUR g-mail e-mail address and preferred nickname
 
 
 ### 4. Load the data
