@@ -1,5 +1,5 @@
 # Tracks
-## GraphQL (Graphene Django) Service and React.js
+## GraphQL (Graphene Django) Service and React.js complete with Docker configuration 
 
 ![Logo](/tracks.png)
 
