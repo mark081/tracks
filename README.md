@@ -11,8 +11,9 @@ Currently there is Docker support to run the GraphQL backend (front-end server c
 ```
 git clone git@github.com:mark081/tracks.git
 cd tracks/tracks-ui
+npm install
 npm run build
-mv build ../tracks-svr
+mv build/ ../tracks-svr
 ```
 
 2. Go to the project root directory and run docker-compose
@@ -30,3 +31,6 @@ docker-compose up --build
 cd app/dev
 ./seed-data.sh
 ```
+
+5. Run http://0.0.0.0:3000/ from your browser of choice
+
