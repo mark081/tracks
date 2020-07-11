@@ -33,5 +33,6 @@ cd app/dev
 ./seed-data.sh
 ```
 
-### 5. Run http://0.0.0.0:3000/ from your browser of choice
+### 5. Open up in your browser
+Run http://0.0.0.0:3000/ from your browser of choice
 
