@@ -20,9 +20,6 @@ services:
     volumes:
       - ./app:/web
   client:
-    build:
-      context: ./tracks-svr
-      dockerfile: Dockerfile
     image: tracks-ui
     working_dir: /ui
     command: npm start
@@ -30,3 +27,14 @@ services:
       - ./tracks-svr:/ui
     ports:
       - "3000:3000"
+    depends_on:
+      - client_env
+  client_env:
+    build:
+      context: ./tracks-svr
+      dockerfile: Dockerfile
+    image: tracks-ui
+    working_dir: /ui
+    command: npm install
+    volumes:
+      - ./tracks-svr:/ui
