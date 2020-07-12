@@ -5,8 +5,6 @@
 
 (For a lesson on using docker-compose and docker using this project go to [my Medium article](https://medium.com/@markcooper_18226/running-multiple-services-in-a-single-docker-container-59f76aee3afb)
 
-Currently there is Docker support to run the GraphQL backend (front-end server coming soon)
-
 ### 1. Get the Repo and build the client
 ```
 git clone git@github.com:mark081/tracks.git
