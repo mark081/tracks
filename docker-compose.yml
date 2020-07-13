@@ -1,11 +1,14 @@
-version: "3"
+version: "3.8"
+volumes:
+  webvol:
+  clientvol:
 
 services:
   web:
     image: tracks-web
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app:/web
+      - webvol:/web
     ports:
       - "8000:8000"
     depends_on:
@@ -18,23 +21,16 @@ services:
     working_dir: /web
     command: python manage.py migrate --noinput
     volumes:
-      - ./app:/web
+      - webvol:/web
   client:
     build:
       context: ./tracks-svr
-      dockerfile: Dockerfile    
+      dockerfile: Dockerfile
     image: tracks-ui
     working_dir: /ui
     command: npm start
     volumes:
-      - ./tracks-svr:/ui
+      - clientvol:/ui
     ports:
       - "3000:3000"
-    # depends_on:
-    #   - client_env
-  # client_env:
-  #   image: tracks-ui
-  #   working_dir: /ui
-  #   command: npm install
-  #   volumes:
-  #     - ./tracks-svr:/ui
+
