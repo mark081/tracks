@@ -1,7 +1,7 @@
 aniso8601==7.0.0
 asgiref==3.2.7
 autopep8==1.5.2
-Django==3.0.7
+Django==3.1.9
 django-cors-headers==3.3.0
 django-db==0.0.7
 django-graphql-jwt==0.3.1
